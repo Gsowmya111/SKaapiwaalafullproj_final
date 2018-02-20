@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:weightSum="4">
+
+
+    <LinearLayout
+        android:id="@+id/icon"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:background="@drawable/kaapiwala_tab"
+        android:orientation="vertical">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+
+            android:textAlignment="center"
+
+            android:textColor="#ff0000"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:text="OTHERS"
+            android:textAlignment="center"
+
+            android:textColor="#ff0000"
+            android:textStyle="bold"/>
+    </LinearLayout>
+----------------------
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:weightSum="2">
+-----------------
+         <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+             android:layout_weight="0.8"
+             android:orientation="horizontal">
+             -------------
+             <LinearLayout
+                 android:layout_width="0dp"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="1.4"
+                 android:orientation="vertical"
+                 android:weightSum="6">
+
+                 <LinearLayout
+                    android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="0.6"/>
+                 -------
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="1.4"
+                     android:orientation="horizontal"
+                     android:weightSum="3">
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="2">
+                         <Button
+                             android:id="@+id/button_milk_far"
+                             android:layout_width="0dp"
+                             android:layout_height="fill_parent"
+                             android:layout_weight="2"
+                             android:background="@drawable/optbck1"
+                             android:ems="10"
+                             android:text="Milk FARWARD"
+                             android:textSize="@dimen/buton_size"
+                             android:textStyle="bold" />
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+
+                     </LinearLayout>
+                 ------
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="0.4"/>
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="1.4"
+                     android:orientation="horizontal"
+                     android:weightSum="3">
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="2">
+                         <Button
+                             android:id="@+id/button_coffe_fard"
+                             android:layout_width="0dp"
+                             android:layout_height="fill_parent"
+                             android:layout_weight="2"
+                             android:background="@drawable/optbck1"
+                             android:ems="10"
+                             android:text="Cofee farward"
+                             android:textSize="@dimen/buton_size"
+                             android:textStyle="bold" />
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+
+                 </LinearLayout>
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="0.3"/>
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="1.4"
+                     android:orientation="horizontal"
+                     android:weightSum="3">
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="2">
+                         <Button
+                             android:id="@+id/buttont_tea_farward"
+                             android:layout_width="0dp"
+                             android:layout_height="fill_parent"
+                             android:layout_weight="2"
+                             android:background="@drawable/optbck1"
+                             android:ems="10"
+                             android:text="Tea farward"
+                             android:textSize="@dimen/buton_size"
+                             android:textStyle="bold" />
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+
+                 </LinearLayout>
+
+             </LinearLayout>
+             ------------
+             <LinearLayout
+                 android:layout_width="0dp"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="0.2"
+                 android:orientation="vertical"
+                 android:weightSum="3">
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.5">
+
+</LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="2">
+                     <Button
+                         android:id="@+id/button_stop"
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="2"
+                         android:background="@drawable/optbck1"
+                         android:ems="10"
+                         android:text="@string/stop_name"
+                         android:textSize="25sp"
+                         android:textStyle="bold"
+                         />
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="0.5">
+
+                 </LinearLayout>
+
+
+             </LinearLayout>
+
+
+             <LinearLayout
+                 android:layout_width="0dp"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="1.4"
+                 android:orientation="vertical"
+                 android:weightSum="6">
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="0.6"/>
+                 -------
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="1.4"
+                     android:orientation="horizontal"
+                     android:weightSum="3">
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="2">
+                         <Button
+                             android:id="@+id/button_milk_rev"
+                             android:layout_width="0dp"
+                             android:layout_height="fill_parent"
+                             android:layout_weight="2"
+                             android:background="@drawable/optbck1"
+                             android:ems="10"
+                             android:text="Milk REVERSE"
+                             android:textSize="@dimen/buton_size"
+                             android:textStyle="bold" />
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+
+                 </LinearLayout>
+                 ------
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="0.3"/>
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="1.4"
+                     android:orientation="horizontal"
+                     android:weightSum="3">
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="2">
+                         <Button
+                             android:id="@+id/button_coffe_rev"
+                             android:layout_width="0dp"
+                             android:layout_height="fill_parent"
+                             android:layout_weight="2"
+                             android:background="@drawable/optbck1"
+                             android:ems="10"
+                             android:text="Cofee reverse"
+                             android:textSize="@dimen/buton_size"
+                             android:textStyle="bold" />
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+
+                 </LinearLayout>
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="0.3"/>
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="1.4"
+                     android:orientation="horizontal"
+                     android:weightSum="3">
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="2">
+                         <Button
+                             android:id="@+id/buttont_tea_rev"
+                             android:layout_width="0dp"
+                             android:layout_height="fill_parent"
+                             android:layout_weight="2"
+                             android:background="@drawable/optbck1"
+                             android:ems="10"
+                             android:text="Tea reverse"
+                             android:textSize="@dimen/buton_size"
+                             android:textStyle="bold" />
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="0dp"
+                         android:layout_height="fill_parent"
+                         android:layout_weight="0.5">
+
+                     </LinearLayout>
+
+
+                 </LinearLayout>
+
+             </LinearLayout>
+
+         </LinearLayout>
+
+-----------------
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.1"
+                android:weightSum="5">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.4" />
+
+                <Button
+                    android:id="@+id/button_sugaronoff"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.6"
+                    android:background="@drawable/optbck1"
+                    android:ems="10"
+                    android:text="Sugar ON OFF"
+                    android:textSize="@dimen/buton_size"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_het_onoff"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.6"
+                    android:background="@drawable/optbck1"
+                    android:ems="10"
+                    android:text="Heater ON OFF"
+                    android:textSize="@dimen/buton_size"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.1"
+                android:weightSum="5">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.4" />
+                <Button
+                    android:id="@+id/button_brew_onoff"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.6"
+                    android:background="@drawable/optbck1"
+                    android:ems="10"
+                    android:text="Brew ON OFF"
+                    android:textSize="@dimen/buton_size"
+                    android:textStyle="bold" />
+
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_hot_onoff"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.6"
+                    android:background="@drawable/optbck1"
+                    android:ems="10"
+                    android:text="Hotwater On OFF"
+                    android:textSize="@dimen/buton_size"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.1"
+                android:weightSum="3">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.9" />
+
+                <Button
+                    android:id="@+id/button_col_onoff"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.2"
+                    android:background="@drawable/optbck1"
+                    android:ems="10"
+                    android:text="Coldwater ON OFF"
+                    android:textSize="@dimen/buton_size"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.9" />
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.1"
+                android:weightSum="3"
+                android:visibility="invisible">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.9" />
+
+                <Button
+
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.2"
+                    android:background="@drawable/optbck1"
+                    android:ems="10"
+                    android:text="BREW CUPS"
+                    android:textSize="@dimen/buton_size"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.9" />
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    ------------------------------------
+
+
+
+
+
+</LinearLayout>
