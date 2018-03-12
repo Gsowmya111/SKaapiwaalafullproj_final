@@ -21,7 +21,8 @@ public class Others_page extends Activity {
         Button  brewcoff1 = (Button) findViewById(R.id.buttonbrewope);
         Button  cupdelay1 = (Button) findViewById(R.id.buttoncupdelayope);
         Button  temp1 = (Button) findViewById(R.id.buttontempope);
-
+        Button  revrese_delay = (Button) findViewById(R.id.reverse_delay_btn);
+        Button  refresh = (Button) findViewById(R.id.refresh_btn);
 
         Button  date1 = (Button) findViewById(R.id.buttondateope);
         Button  brewcups1 = (Button) findViewById(R.id.buttonbrewcupsope);
@@ -29,6 +30,23 @@ public class Others_page extends Activity {
         Button  mptor_rev = (Button) findViewById(R.id.btn_motr_rev);
         Button bback = (Button) findViewById(R.id.buttonback);
         Button  brewtea = (Button) findViewById(R.id.buttonbrewope1);
+
+        revrese_delay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i11 = new Intent(Others_page.this,Reverse_Delay.class);
+                startActivity(i11);
+                finish();
+            }
+        });
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i3 = new Intent(Others_page.this,Refresh.class);
+                startActivity(i3);
+                finish();
+            }
+        });
 
 
         bback.setOnClickListener(new View.OnClickListener() {

@@ -163,18 +163,19 @@
 
             <EditText
                 android:id="@+id/etcoffeeval"
-                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/display_tab"
+                android:layout_width="0dp"
+                android:background="@drawable/edit_ml"
                 android:gravity="center"
                 android:hint="00.0"
-                android:inputType="numberDecimal"
                 android:maxLength="4"
-                android:textColor="#000"
                 android:textColorHint="#8b8682"
+                android:focusable="false"
+                android:textColor="#000"
+                android:inputType="none"
                 android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="@dimen/campaign2" />
+                android:textSize="@dimen/campaign2"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -232,19 +233,18 @@
 
             <EditText
                 android:id="@+id/etmilkval"
-                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/display_tab"
+                android:layout_width="0dp"
+                android:background="@drawable/edit_ml"
                 android:gravity="center"
                 android:hint="00.0"
-                android:inputType="numberDecimal"
-                android:maxLength="4"
-                android:textColor="#000"
                 android:textColorHint="#8b8682"
+                android:textColor="#000"
+                android:inputType="none"
+                android:focusable="false"
                 android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="@dimen/campaign2" />
-
+                android:textSize="@dimen/campaign2"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout

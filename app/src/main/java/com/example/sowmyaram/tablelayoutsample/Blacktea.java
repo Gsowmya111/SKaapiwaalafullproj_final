@@ -14,6 +14,7 @@ import android.os.Message;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.method.DigitsKeyListener;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,13 @@ import java.util.UUID;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_back;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_full_cmd;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.set_cmd_full_half;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_coff_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_milk_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.s;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.spinertextval;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.val;
 
 
 public class Blacktea extends Activity {
@@ -206,7 +214,7 @@ public class Blacktea extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                if ( etsugarv.length()!=0 && etsugarv.length()>=3 && etteaval.length()!=0 &&etteaval.length()>=3 &&etwaterspeed.length()!=0&&etteaval.length()>=3  ) {
+                if ( etsugarv.length()!=0  && etteaval.length()!=0  &&etwaterspeed.length()!=0) {
 
                     if (etsugarv.getText().toString().contains(".")) {
 
@@ -246,7 +254,7 @@ public class Blacktea extends Activity {
                         /////////////////////////////////////////////////
 
 
-                        bytesToSend = etteaval.getText().toString().getBytes();
+                        bytesToSend = et_milk_ml.getBytes();
                         zero();
 
 
@@ -275,7 +283,7 @@ public class Blacktea extends Activity {
 /////////////////////////////////////////////////////////////////////*B,00.0,00.0,00.0,00.0,000#
 
 
-                        bytesToSend = etwaterspeed.getText().toString().getBytes();
+                        bytesToSend = et_coff_ml.getBytes();
                         zero();
                         bytesToSend4 = "#\n";
                         theByteArray3 = bytesToSend4.getBytes();
@@ -377,7 +385,75 @@ public class Blacktea extends Activity {
                 }
             }
         });
+
+        etteaval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etteaval.setText("");
+                spinertextval="etteaval";
+                spinnermethod();
+
+
+            }
+        });
+
+        etwaterspeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etwaterspeed.setText("");
+                spinertextval="etwaterspeed";
+                spinnermethod();
+            }
+        });
+
+
     }
+
+    public  void spinnermethod()
+    {
+        View alertLayout;
+        LayoutInflater inflater1 = getLayoutInflater();
+        alertLayout = inflater1.inflate(R.layout.popup, null);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(Blacktea.this,R.style.MyDialogTheme1);
+
+        alert.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        int val1 = s.getSelectedItemPosition();
+                        val = s.getSelectedItem().toString();
+
+                        if(spinertextval.equals("etteaval")){
+                            etteaval.setText(val);
+                            et_milk_ml=(arraySpinner_alernate_values[val1]);
+                        } if(spinertextval.equals("etwaterspeed")){
+                            et_coff_ml=(arraySpinner_alernate_values[val1]);
+                            etwaterspeed.setText(val);
+                        }
+
+                    }
+                });
+
+
+
+
+        alert.setView(alertLayout);
+        alert.setCancelable(true);
+        final AlertDialog dialog1 = alert.create();
+        dialog1.show();
+
+        s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
+
+        int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.65);
+        int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.35);
+        dialog1.getWindow().setLayout(width, height);
+        dialog1.show();
+    }
+
+
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -431,11 +507,21 @@ public class Blacktea extends Activity {
                                     String bhalf = message.substring(3, 7);
                                     etsugarv.setText(bhalf.replaceAll("[^0-9.]", ""));
 
+                                    //setting tea and water value from spinner
                                     String bfull = message.substring(8, 12);
-                                    etteaval.setText(bfull.replaceAll("[^0-9.]", ""));
-
                                     String shalf = message.substring(13);
-                                    etwaterspeed.setText(shalf.replaceAll("[^0-9.]", ""));
+                                    String z11 = shalf.replaceAll("[^0-9.]", "");
+                                    String bfull1 = bfull.replaceAll("[^0-9.]", "");
+
+                                    for (int j = 0; j <= arraySpinner_alernate_values.length; j++) {
+                                        if (arraySpinner_alernate_values[j].equals(bfull1)) {
+                                            etteaval.setText(arraySpinner[j]);
+
+                                        }  if (arraySpinner_alernate_values[j].equals(z11)) {
+                                            etwaterspeed.setText(arraySpinner[j]);
+                                        }
+                                    }
+
 
 
                                 }

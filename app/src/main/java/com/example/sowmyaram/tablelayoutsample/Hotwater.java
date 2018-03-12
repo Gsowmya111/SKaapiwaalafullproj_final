@@ -16,6 +16,7 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +36,12 @@ import java.util.UUID;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_back;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_full_cmd;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.set_cmd_full_half;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_milk_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.s;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.spinertextval;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.val;
 
 
 public class Hotwater extends Activity {
@@ -139,15 +146,15 @@ public class Hotwater extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                if ( etsugarv.length() != 0 && etsugarv.length() >= 3) {
+                if ( etsugarv.length() != 0 ) {
 
-                    if (etsugarv.getText().toString().contains(".")) {
+                    //if (etsugarv.getText().toString().contains(".")) {
 
 
                         String bytesToSend1 = set_cmd_full_half;
                         theByteArray = bytesToSend1.getBytes();
 
-                        bytesToSend = etsugarv.getText().toString().getBytes();
+                        bytesToSend = et_milk_ml.getBytes();
                         zero();
                         bytesToSend4 = "#\n";
                         theByteArray3 = bytesToSend4.getBytes();
@@ -179,7 +186,7 @@ public class Hotwater extends Activity {
                         /////////////////////////////////////////////////
 
 
-                    }
+                   // }
                 }else {
                         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Hotwater.this);
                         alertBuilder.setTitle("Invalid Data");
@@ -255,7 +262,62 @@ public class Hotwater extends Activity {
                 }
             }
         });
+
+
+        etsugarv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etsugarv.setText("");
+                spinertextval="etsugarv";
+                spinnermethod();
+            }
+        });
+
+
     }
+
+    public  void spinnermethod()
+    {
+        View alertLayout;
+        LayoutInflater inflater1 = getLayoutInflater();
+        alertLayout = inflater1.inflate(R.layout.popup, null);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(Hotwater.this,R.style.MyDialogTheme1);
+
+        alert.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        int val1 = s.getSelectedItemPosition();
+                        val = s.getSelectedItem().toString();
+
+                        if(spinertextval.equals("etsugarv")){
+                            etsugarv.setText(val);
+                            et_milk_ml=(arraySpinner_alernate_values[val1]);
+                        }/* if(spinertextval.equals("etcoffeev")){
+                            et_coff_ml=(arraySpinner_alernate_values[val1]);
+                            etcoffeev.setText(val);
+                        }*/
+
+                    }
+                });
+
+
+
+
+        alert.setView(alertLayout);
+        alert.setCancelable(true);
+        final AlertDialog dialog1 = alert.create();
+        dialog1.show();
+
+        s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
+
+        int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.65);
+        int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.35);
+        dialog1.getWindow().setLayout(width, height);
+        dialog1.show();
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -314,8 +376,15 @@ public class Hotwater extends Activity {
                                 public void run() {
 
                                     String bhalf = message.substring(3, 7);
-                                    etsugarv.setText(bhalf.replaceAll("[^0-9.]", ""));
+                                    String bhalf1=bhalf.replaceAll("[^0-9.]", "");
+                                    for(int j=0;j<=arraySpinner_alernate_values.length;j++) {
+                                        if (arraySpinner_alernate_values[j].equals(bhalf1)) {
+                                            //   String  bfull1= arraySpinner[j];
+                                            etsugarv.setText(arraySpinner[j]);
 
+                                        }
+
+                                    }
 
 
                                 }

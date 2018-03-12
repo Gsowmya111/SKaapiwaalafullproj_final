@@ -194,7 +194,7 @@
             android:layout_weight="0.2">
 
         </LinearLayout>
-
+---------
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
@@ -248,6 +248,59 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1.2"
+            android:weightSum="5"
+            >
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.4" />
+
+            <Button
+                android:id="@+id/reverse_delay_btn"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:background="@drawable/optbck1"
+                android:ems="10"
+                android:text="REVERSE DELAY"
+                android:textSize="@dimen/buton_size"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.2" />
+
+            <Button
+                android:id="@+id/refresh_btn"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:background="@drawable/optbck1"
+                android:ems="10"
+                android:text="REFRESH"
+                android:textSize="@dimen/buton_size"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.4" />
+        </LinearLayout>
+
+--------
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2"
             android:weightSum="3">
 
             <Space
@@ -276,58 +329,31 @@
 
         </LinearLayout>
 
---------
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2">
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.2"
-            android:weightSum="5"
-            android:visibility="invisible">
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.4" />
 
-            <Button
 
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="2"
-                android:background="@drawable/optbck1"
-                android:ems="10"
-                android:text="MILK"
-                android:textSize="@dimen/buton_size"
-                android:textStyle="bold" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.2" />
 
-            <Button
 
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="2"
-                android:background="@drawable/optbck1"
-                android:ems="10"
-                android:text="MILK REVERSE"
-                android:textSize="@dimen/buton_size"
-                android:textStyle="bold" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.4" />
-        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ---------
 
         <LinearLayout
             android:layout_width="fill_parent"

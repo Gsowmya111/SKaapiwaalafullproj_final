@@ -16,7 +16,10 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -30,11 +33,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_back;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_full_cmd;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.set_cmd_full_half;
+import static com.example.sowmyaram.tablelayoutsample.R.id.spiner;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_coff_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_milk_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.s;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.spinertextval;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.val;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.val1;
 
 
 public class Tea extends Activity {
@@ -54,6 +69,20 @@ public class Tea extends Activity {
     ByteArrayOutputStream output;
     String digits;
     LinearLayout lcon;
+    Spinner spinerr;
+
+
+   /* String[] arraySpinner = new String[] {"2","4", "6", "8", "10","12","14","16","18","20","22","24",
+            "26","28","30","32","34","36","40","42","44","46","48","50"};*/
+   /* String[] arraySpinner_alernate_values = new String[] {"1.2","1.4", "1.6", "1.8", "2.0","2.2","2.3","2.5","2.6","2.8","2.7","2.9",
+            "3.0","3.1","3.2","3.3","3.4","3.5","3.6","3.7","3.8","3.9","4.1","4.2"};*/
+
+
+
+
+   /* private static final Set<String> arraySpinner = new HashSet<String>(Arrays.asList(
+            new String[] {"2","4", "6", "8", "10","12","14","16","18","20","22","24",
+                    "26","28","30","32","34","36","40","42","44","46","48","50"}));*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +107,7 @@ public class Tea extends Activity {
         bset = (Button) findViewById(R.id.buttonset);
         bback = (Button) findViewById(R.id.buttonback);
         lcon = (LinearLayout) findViewById(R.id.lcon);
+        etcoffeev.clearFocus();
 
       //To send *RF# cmd while opening blacktea page and if bluetooth is connected then kaapiwaala tab will turn to green
         try{
@@ -240,7 +270,7 @@ public class Tea extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                if ( etsugarv.length()!=0 && etsugarv.length()>=3 && etcoffeev.length()!=0 &&etmilkval.length()!=0 && etmilkdelay.length()!=0  ) {
+                if ( etsugarv.length()!=0 && etcoffeev.length()!=0 &&etmilkval.length()!=0 && etmilkdelay.length()!=0  ) {
 
                     if (etsugarv.getText().toString().contains(".")) {
 
@@ -279,8 +309,8 @@ public class Tea extends Activity {
 
                         /////////////////////////////////////////////////
 
-
-                        bytesToSend = etcoffeev.getText().toString().getBytes();
+                        bytesToSend = et_coff_ml.getBytes();
+                    //    bytesToSend = etcoffeev.getText().toString().getBytes();
                         zero();
 
 
@@ -335,8 +365,8 @@ public class Tea extends Activity {
                         Btconnection.sendbt(data2);
 
 /////////////////////////////////////////////////////////////////
-
-                        bytesToSend = etmilkval.getText().toString().getBytes();
+                        bytesToSend = et_milk_ml.getBytes();
+                       // bytesToSend = etmilkval.getText().toString().getBytes();
                         zero();
 
 
@@ -467,7 +497,77 @@ public class Tea extends Activity {
                 }
             }
         });
+
+
+
+
+        etcoffeev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etcoffeev.setText("");
+                spinertextval = "etcoffeev";
+                spinnermethod();
+
+            }
+        });
+        etmilkval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etmilkval.setText("");
+                spinertextval="etmilkval";
+                spinnermethod();
+            }
+        });
+
+
     }
+
+    public  void spinnermethod()
+    {
+        View alertLayout;
+        LayoutInflater inflater1 = getLayoutInflater();
+        alertLayout = inflater1.inflate(R.layout.popup, null);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(Tea.this,R.style.MyDialogTheme1);
+
+        alert.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                       val1 = s.getSelectedItemPosition();
+                        val = s.getSelectedItem().toString();
+
+                        if(spinertextval.equals("etmilkval")){
+                            etmilkval.setText(val);
+                          et_milk_ml=(arraySpinner_alernate_values[val1]);
+                        } if(spinertextval.equals("etcoffeev")){
+                            et_coff_ml=(arraySpinner_alernate_values[val1]);
+                            etcoffeev.setText(val);
+                        }
+
+                    }
+                });
+
+
+
+
+        alert.setView(alertLayout);
+        alert.setCancelable(true);
+        final AlertDialog dialog1 = alert.create();
+        dialog1.show();
+
+       s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
+
+        int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.65);
+        int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.35);
+        dialog1.getWindow().setLayout(width, height);
+        dialog1.show();
+    }
+
+
+
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -527,18 +627,23 @@ public class Tea extends Activity {
 
                                     String bhalf = message.substring(3, 7);
                                     etsugarv.setText(bhalf.replaceAll("[^0-9.]", ""));
-
-                                    String bfull = message.substring(8, 12);
-                                    etcoffeev.setText(bfull.replaceAll("[^0-9.]", ""));
-
                                     String shalf = message.substring(13,17);
                                     etmilkdelay.setText(shalf.replaceAll("[^0-9.]", ""));
 
-                                    String z1 = message.substring(18);
-                                    etmilkval.setText(z1.replaceAll("[^0-9.]", ""));
 
-                                    /*String z2 = message.substring(23);
-                                    etmilkspeed.setText(z2.replaceAll("[^0-9.]", ""));*/
+                                    String bfull = message.substring(8, 12);
+                                    String z1 = message.substring(18);
+
+                                    String z11 = z1.replaceAll("[^0-9.]", "");
+                                    String bfull1 = bfull.replaceAll("[^0-9.]", "");
+                                    for (int j = 0; j <= arraySpinner_alernate_values.length; j++) {
+                                        if (arraySpinner_alernate_values[j].equals(bfull1)) {
+                                            etcoffeev.setText(arraySpinner[j]);
+
+                                        }  if (arraySpinner_alernate_values[j].equals(z11)) {
+                                            etmilkval.setText(arraySpinner[j]);
+                                        }
+                                    }
 
 
                                 }
@@ -610,6 +715,8 @@ public class Tea extends Activity {
         }
 
     }
+
+
 
 
 

@@ -159,18 +159,20 @@
 
             <EditText
                 android:id="@+id/etcoffeeval"
-                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/display_tab"
+                android:layout_width="0dp"
+                android:background="@drawable/edit_ml"
                 android:gravity="center"
-                android:inputType="numberDecimal"
                 android:hint="00.0"
+                android:maxLength="4"
                 android:textColorHint="#8b8682"
                 android:textColor="#000"
+                android:inputType="none"
+                android:focusable="false"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/campaign2"
-                android:maxLength="2"/>
+                android:layout_weight="1" />
+
 
         </LinearLayout>
         <LinearLayout
@@ -193,18 +195,22 @@
 
             <EditText
                 android:id="@+id/etwaterspeed"
-                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/display_tab"
+                android:layout_width="0dp"
+                android:background="@drawable/edit_ml"
                 android:gravity="center"
-                android:inputType="numberDecimal"
                 android:hint="00.0"
+                android:maxLength="4"
                 android:textColorHint="#8b8682"
                 android:textColor="#000"
+                android:inputType="none"
+                android:focusable="false"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/campaign2"
-                android:maxLength="2"/>
+                android:layout_weight="1" />
+
+
+
 
         </LinearLayout>
         <LinearLayout
@@ -263,8 +269,8 @@
                 android:background="@drawable/readsetback"
                 android:text="READ"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/campaign2"
-                android:textStyle="bold" />
+                android:textSize="@dimen/campaign_textfontsize"
+                android:textStyle="bold"  />
 
 
         </LinearLayout>
@@ -299,7 +305,7 @@
                 android:background="@drawable/readsetback"
                 android:text="SET"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/campaign2"
+                android:textSize="@dimen/campaign_textfontsize"
                 android:textStyle="bold" />
 
 
@@ -336,7 +342,7 @@
                 android:background="@drawable/readsetback"
                 android:text="BACK"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/campaign2"
+                android:textSize="@dimen/campaign_textfontsize"
                 android:textStyle="bold" />
 
 

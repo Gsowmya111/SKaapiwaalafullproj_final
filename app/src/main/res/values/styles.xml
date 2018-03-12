@@ -15,4 +15,13 @@
         <!--dialog background-->
         <item name="android:windowBackground">@drawable/i3</item>
     </style>
+
+    <style name="MyDialogTheme1" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--buttons color-->
+
+        <!--title and message color-->
+        <item name="android:textColorPrimary">#000</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@color/colorAccent_gry</item>
+    </style>
 </resources>

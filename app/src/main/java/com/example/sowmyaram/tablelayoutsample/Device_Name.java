@@ -96,7 +96,7 @@ public class Device_Name extends Activity {
             public void onClick(View v) {
                 try{
                     if ( edit_dev_name.length()!=0){
-                            String bytesToSend1 = "*";
+                            String bytesToSend1 = "*XX,";
                             theByteArray = bytesToSend1.getBytes();
 
                             bytesToSend = edit_dev_name.getText().toString().getBytes();

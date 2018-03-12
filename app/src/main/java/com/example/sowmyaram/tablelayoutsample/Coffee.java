@@ -16,7 +16,9 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -35,6 +37,11 @@ import java.util.UUID;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_back;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_full_cmd;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.set_cmd_full_half;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_coff_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_milk_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.val;
 
 
 public class Coffee extends Activity {
@@ -54,7 +61,8 @@ public class Coffee extends Activity {
     ByteArrayOutputStream output;
     String digits;
     LinearLayout lcon;
-
+    private String spinertextval;
+    android.widget.Spinner s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,7 +246,7 @@ public class Coffee extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                if ( etsugarv.length()!=0 && etsugarv.length()>=3 && etcoffeev.length()!=0 &&etmilkval.length()!=0 && etmilkdelay.length()!=0   ) {
+                if ( etsugarv.length()!=0  && etcoffeev.length()!=0 &&etmilkval.length()!=0 && etmilkdelay.length()!=0   ) {
 
                     if ( etsugarv.getText().toString().contains(".")  ) {
                         String bytesToSend1 = set_cmd_full_half;
@@ -276,7 +284,7 @@ public class Coffee extends Activity {
                         /////////////////////////////////////////////////
 
 
-                        bytesToSend = etcoffeev.getText().toString().getBytes();
+                        bytesToSend = et_coff_ml.getBytes();
                         zero();
                         bytesToSend4 = ",";
                         theByteArray3 = bytesToSend4.getBytes();
@@ -323,7 +331,7 @@ public class Coffee extends Activity {
 
 /////////////////////////////////////////////////////////////////
 
-                        bytesToSend = etmilkval.getText().toString().getBytes();
+                        bytesToSend = et_milk_ml.getBytes();
                         zero();
                         bytesToSend4 = "#\n";
                         theByteArray3 = bytesToSend4.getBytes();
@@ -437,7 +445,78 @@ public class Coffee extends Activity {
                 }
             }
         });
+
+
+
+        etcoffeev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etcoffeev.setText("");
+                spinertextval="etcoffeev";
+                spinnermethod();
+            }
+        });
+
+        etmilkval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etmilkval.setText("");
+                spinertextval="etmilkval";
+                spinnermethod();
+            }
+        });
+
+
+
+
     }
+
+
+
+
+
+    public  void spinnermethod()
+    {
+        View alertLayout;
+        LayoutInflater inflater1 = getLayoutInflater();
+        alertLayout = inflater1.inflate(R.layout.popup, null);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(Coffee.this,R.style.MyDialogTheme1);
+
+        alert.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        int val1 = s.getSelectedItemPosition();
+                        val = s.getSelectedItem().toString();
+
+                        if(spinertextval.equals("etmilkval")){
+                            etmilkval.setText(val);
+                            et_milk_ml=(arraySpinner_alernate_values[val1]);
+                        } if(spinertextval.equals("etcoffeev")){
+                            et_coff_ml=(arraySpinner_alernate_values[val1]);
+                            etcoffeev.setText(val);
+                        }
+
+                    }
+                });
+
+
+
+
+        alert.setView(alertLayout);
+        alert.setCancelable(true);
+        final AlertDialog dialog1 = alert.create();
+        dialog1.show();
+
+        s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
+
+        int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.65);
+        int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.35);
+        dialog1.getWindow().setLayout(width, height);
+        dialog1.show();
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -491,18 +570,25 @@ public class Coffee extends Activity {
 
                                     String bhalf = message.substring(3, 7);
                                     etsugarv.setText(bhalf.replaceAll("[^0-9.]", ""));
-
-                                    String bfull = message.substring(8, 12);
-                                    etcoffeev.setText(bfull.replaceAll("[^0-9.]", ""));
-
                                     String shalf = message.substring(13, 17);
                                     etmilkdelay.setText(shalf.replaceAll("[^0-9.]", ""));
 
-                                    String z1 = message.substring(18);
-                                    etmilkval.setText(z1.replaceAll("[^0-9.]", ""));
 
-                                  /*  String z2 = message.substring(23);
-                                    etmilkspeed.setText(z2.replaceAll("[^0-9.]", ""));*/
+                                    String bfull = message.substring(8, 12);
+                                    String z1 = message.substring(18);
+
+                                    String z11 = z1.replaceAll("[^0-9.]", "");
+                                    String bfull1 = bfull.replaceAll("[^0-9.]", "");
+                                    for (int j = 0; j <= arraySpinner_alernate_values.length; j++) {
+                                        if (arraySpinner_alernate_values[j].equals(bfull1)) {
+                                            etcoffeev.setText(arraySpinner[j]);
+
+                                        }  if (arraySpinner_alernate_values[j].equals(z11)) {
+                                            etmilkval.setText(arraySpinner[j]);
+                                        }
+                                    }
+
+
                                 }
                             });
                         }
@@ -568,6 +654,7 @@ public class Coffee extends Activity {
         }
 
     }
+
 }
 
 

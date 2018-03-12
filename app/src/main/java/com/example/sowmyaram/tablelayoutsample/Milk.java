@@ -14,6 +14,7 @@ import android.os.Message;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.method.DigitsKeyListener;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,12 @@ import java.util.UUID;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_back;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_full_cmd;
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.set_cmd_full_half;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_milk_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.s;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.spinertextval;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.val;
 
 
 public class Milk extends Activity {
@@ -51,7 +58,7 @@ public class Milk extends Activity {
     ByteArrayOutputStream output;
     String digits;
     LinearLayout lcon;
-
+    String bfull1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,9 +180,9 @@ public class Milk extends Activity {
                                     @Override
                                     public void onClick(View v) {
                                         try{
-                                        if (etsugarv.length() != 0 && etsugarv.length() >= 3 && etmilkval.length() != 0 ) {
+                                        if (etsugarv.length() != 0 && etmilkval.length() != 0 ) {
 
-                                            if (etsugarv.getText().toString().contains(".")) {
+                                          //  if (etsugarv.getText().toString().contains(".")) {
 
 
                                                 String bytesToSend1 = set_cmd_full_half;
@@ -213,7 +220,7 @@ public class Milk extends Activity {
                                                 /////////////////////////////////////////////////
 
 
-                                                bytesToSend = etmilkval.getText().toString().getBytes();
+                                                bytesToSend = et_milk_ml.getBytes();
                                                 zero();
 
 
@@ -269,7 +276,7 @@ public class Milk extends Activity {
                                             String data4 = new String(out);
                                             Btconnection.sendbt(data4);*/
 
-                                        }
+                                     //   }
 
 /////////////////////////////////////////////////////////////////
 
@@ -347,7 +354,60 @@ public class Milk extends Activity {
 
             }
         });
+
+        etmilkval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etmilkval.setText("");
+                spinertextval="etmilkval";
+                spinnermethod();
+
+
+            }
+        });
+
     }
+
+    public  void spinnermethod()
+    {
+        View alertLayout;
+        LayoutInflater inflater1 = getLayoutInflater();
+        alertLayout = inflater1.inflate(R.layout.popup, null);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(Milk.this,R.style.MyDialogTheme1);
+
+        alert.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        int val1 = s.getSelectedItemPosition();
+                        val = s.getSelectedItem().toString();
+
+                        if(spinertextval.equals("etmilkval")){
+                            etmilkval.setText(val);
+                            et_milk_ml=(arraySpinner_alernate_values[val1]);
+                        }
+
+                    }
+                });
+
+
+
+
+        alert.setView(alertLayout);
+        alert.setCancelable(true);
+        final AlertDialog dialog1 = alert.create();
+        dialog1.show();
+
+        s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
+
+        int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.65);
+        int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.35);
+        dialog1.getWindow().setLayout(width, height);
+        dialog1.show();
+    }
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -372,7 +432,7 @@ public class Milk extends Activity {
                         final String message = (String) msg.obj;
                         //Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-                        if ((message.startsWith("*")) && (message.endsWith("#"))  && message.length() <= 5) {
+                        if ((message.startsWith("*")) && (message.endsWith("#")) && message.length() <= 5) {
                             runOnUiThread(new Runnable() {
                                 public void run() {
                                     // Toast.makeText(Logins.this,"incom1 "+message,Toast.LENGTH_LONG).show();
@@ -404,7 +464,17 @@ public class Milk extends Activity {
                                     etsugarv.setText(bhalf.replaceAll("[^0-9.]", ""));
 
                                     String bfull = message.substring(8);
-                                    etmilkval.setText(bfull.replaceAll("[^0-9.]", ""));
+                                    String   bfull2= bfull.replaceAll("[^0-9.]", "");
+                                    //setting the ml values to edittext from respective spinner values
+                                    for(int j=0;j<=arraySpinner_alernate_values.length;j++){
+                                        if (arraySpinner_alernate_values[j].equals(bfull2)) {
+                                            etmilkval.setText(arraySpinner[j]);
+
+                                        }
+                                    }
+
+
+                              //      etmilkval.setText(bfull.replaceAll("[^0-9.]", ""));
 
                                    /* String shalf = message.substring(13);
                                     etmilkspeed.setText(shalf.replaceAll("[^0-9.]", ""));*/
