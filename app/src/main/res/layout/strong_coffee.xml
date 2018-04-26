@@ -141,6 +141,7 @@
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/campaign2" />
 
+
         </LinearLayout>
 
         <LinearLayout

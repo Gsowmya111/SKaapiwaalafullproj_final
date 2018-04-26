@@ -122,6 +122,7 @@
                 android:textSize="@dimen/campaign2"
                 android:textStyle="bold" />
 
+
             <EditText
                 android:id="@+id/etsugarval"
                 android:layout_width="0dp"
@@ -136,6 +137,8 @@
                 android:textColorHint="#8b8682"
                 android:layout_weight="1"
                 android:maxLength="2"/>
+
+
 
         </LinearLayout>
 

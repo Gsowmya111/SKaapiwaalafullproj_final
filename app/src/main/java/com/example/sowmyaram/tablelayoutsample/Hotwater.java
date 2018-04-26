@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -38,6 +41,10 @@ import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_full_cmd
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.set_cmd_full_half;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_hotwatr;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_hotwater;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_milk;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_tea;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.et_milk_ml;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.s;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.spinertextval;
@@ -105,7 +112,7 @@ public class Hotwater extends Activity {
         //making edittext to take data in 0.0 format
         etsugarv.setFilters(new InputFilter[] {
                 new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
-                    int beforeDecimal = 2, afterDecimal = 1;
+                    int beforeDecimal = 3, afterDecimal = 1;
 
                     @Override
                     public CharSequence filter(CharSequence source, int start, int end,
@@ -282,7 +289,7 @@ public class Hotwater extends Activity {
         LayoutInflater inflater1 = getLayoutInflater();
         alertLayout = inflater1.inflate(R.layout.popup, null);
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(Hotwater.this,R.style.MyDialogTheme1);
+        AlertDialog.Builder alert = new AlertDialog.Builder(Hotwater.this);
 
         alert.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
@@ -293,7 +300,7 @@ public class Hotwater extends Activity {
 
                         if(spinertextval.equals("etsugarv")){
                             etsugarv.setText(val);
-                            et_milk_ml=(arraySpinner_alernate_values[val1]);
+                            et_milk_ml=(arraySpinner_alernate_values_hotwatr[val1]);
                         }/* if(spinertextval.equals("etcoffeev")){
                             et_coff_ml=(arraySpinner_alernate_values[val1]);
                             etcoffeev.setText(val);
@@ -311,6 +318,9 @@ public class Hotwater extends Activity {
         dialog1.show();
 
         s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
+
+            s.setAdapter(new MyAdapter(Hotwater.this, R.layout.spinner_item, arraySpinner_hotwater));
+
 
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.65);
         int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.35);
@@ -377,10 +387,10 @@ public class Hotwater extends Activity {
 
                                     String bhalf = message.substring(3, 7);
                                     String bhalf1=bhalf.replaceAll("[^0-9.]", "");
-                                    for(int j=0;j<=arraySpinner_alernate_values.length;j++) {
-                                        if (arraySpinner_alernate_values[j].equals(bhalf1)) {
+                                    for(int j=0;j<=arraySpinner_alernate_values_hotwatr.length;j++) {
+                                        if (arraySpinner_alernate_values_hotwatr[j].equals(bhalf1)) {
                                             //   String  bfull1= arraySpinner[j];
-                                            etsugarv.setText(arraySpinner[j]);
+                                            etsugarv.setText(arraySpinner_hotwater[j]);
 
                                         }
 
@@ -448,6 +458,39 @@ public class Hotwater extends Activity {
         }
 
     }
+
+    public class MyAdapter extends ArrayAdapter {
+        private Context context;
+        public MyAdapter(Context context, int textViewResourceId, String[] objects) {
+
+            super(context, textViewResourceId, objects);
+
+        }
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.spinner_item, parent, false);
+            TextView tvLanguage = (TextView) layout.findViewById(R.id.textView);
+
+                tvLanguage.setText(arraySpinner_hotwater[position]);
+
+
+            // tvLanguage.setText(spinner2_arr.get(position));
+            //tvLanguage.setTextColor(Color.rgb(75, 180, 225));
+            return layout;
+        }
+
+        // It gets a View that displays in the drop down popup the data at the specified position
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+        // It gets a View that displays the data at the specified position
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+    }
+
 
 
 

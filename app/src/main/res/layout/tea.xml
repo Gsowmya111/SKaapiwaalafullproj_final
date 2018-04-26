@@ -134,7 +134,6 @@
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/campaign2"
                 android:layout_weight="1" />
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
@@ -161,7 +160,7 @@
                 android:background="@drawable/edit_ml"
                 android:gravity="center"
                 android:hint="00.0"
-                android:maxLength="4"
+                android:maxLength="5"
                 android:textColorHint="#8b8682"
                 android:textColor="#000"
                 android:inputType="none"
@@ -229,8 +228,7 @@
                 android:layout_height="fill_parent"
                 android:background="@drawable/edit_ml"
                 android:gravity="center"
-                android:hint="00.0"
-                android:maxLength="4"
+                android:maxLength="5"
                 android:textColorHint="#8b8682"
                 android:textColor="#000"
                 android:inputType="none"

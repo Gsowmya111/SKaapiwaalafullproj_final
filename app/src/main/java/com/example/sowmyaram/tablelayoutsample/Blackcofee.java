@@ -4,10 +4,12 @@ package com.example.sowmyaram.tablelayoutsample;
 
         import android.app.Activity;
         import android.app.AlertDialog;
+        import android.app.Dialog;
         import android.app.ProgressDialog;
         import android.bluetooth.BluetoothAdapter;
         import android.bluetooth.BluetoothDevice;
         import android.bluetooth.BluetoothSocket;
+        import android.content.Context;
         import android.content.DialogInterface;
         import android.content.Intent;
         import android.os.Bundle;
@@ -18,9 +20,12 @@ package com.example.sowmyaram.tablelayoutsample;
         import android.text.method.DigitsKeyListener;
         import android.view.LayoutInflater;
         import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.LinearLayout;
+        import android.widget.NumberPicker;
         import android.widget.TextView;
         import android.widget.Toast;
 
@@ -37,8 +42,19 @@ package com.example.sowmyaram.tablelayoutsample;
         import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.set_cmd_full_half;
         import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner;
         import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_cofee;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_hotwatr;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_milk;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_sugar;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_tea;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_coffe;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_hotwater;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_milk;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_sugar;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_tea;
         import static com.example.sowmyaram.tablelayoutsample.Spinner.et_coff_ml;
         import static com.example.sowmyaram.tablelayoutsample.Spinner.et_milk_ml;
+        import static com.example.sowmyaram.tablelayoutsample.Spinner.et_sug_ml;
         import static com.example.sowmyaram.tablelayoutsample.Spinner.s;
         import static com.example.sowmyaram.tablelayoutsample.Spinner.spinertextval;
         import static com.example.sowmyaram.tablelayoutsample.Spinner.val;
@@ -128,15 +144,15 @@ public class Blackcofee extends Activity {
                         if (temp.equals(".")) {
                             return "0.0";
                         }
-                         if (temp.toString().indexOf(".") == -1) {
+                        if (temp.toString().indexOf(".") == -1) {
                             // no decimal point placed yet
                             if (temp.length() > beforeDecimal) {
                                 return "";
                             }
                         }  else if (temp.length() > 5) {
-                             temp = null;
-                             temp = (String) source;
-                         }else {
+                            temp = null;
+                            temp = (String) source;
+                        }else {
                             temp = temp.substring(temp.indexOf(".") + 1);
                             if (temp.length() > afterDecimal) {
                                 return "";
@@ -151,7 +167,7 @@ public class Blackcofee extends Activity {
         //making edittext to take data in 0.0 format
         etcoffeev.setFilters(new InputFilter[] {
                 new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
-                    int beforeDecimal = 2, afterDecimal = 1;
+                    int beforeDecimal = 3, afterDecimal = 1;
 
                     @Override
                     public CharSequence filter(CharSequence source, int start, int end,
@@ -184,7 +200,7 @@ public class Blackcofee extends Activity {
         //making edittext to take data in 0.0 format
         etwaterspeed.setFilters(new InputFilter[] {
                 new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
-                    int beforeDecimal = 2, afterDecimal = 1;
+                    int beforeDecimal = 3, afterDecimal = 1;
 
                     @Override
                     public CharSequence filter(CharSequence source, int start, int end,
@@ -225,13 +241,10 @@ public class Blackcofee extends Activity {
             public void onClick(View v) {
                 try{
                 if ( etsugarv.length()!=0  && etcoffeev.length()!=0 &&etwaterspeed.length()!=0  ) {
-
-                    if (etsugarv.getText().toString().contains(".")) {
-
-
+                  //  if (etsugarv.getText().toString().contains(".")) {
                         String bytesToSend1 = set_cmd_full_half;
                         theByteArray = bytesToSend1.getBytes();
-
+                        // bytesToSend = et_sug_ml.getBytes();
                         bytesToSend = etsugarv.getText().toString().getBytes();
                         zero();
                         bytesToSend4 = ",";
@@ -324,7 +337,7 @@ public class Blackcofee extends Activity {
 /////////////////////////////////////////////////////////////////
 
 
-                    }
+                  //  }
                 }
                 else
                 {
@@ -428,9 +441,19 @@ public class Blackcofee extends Activity {
             }
         });
 
-
+       /* etsugarv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etsugarv.setText("");
+                spinertextval="etsugarv";
+                spinnermethod();
+            }
+        });
+*/
 
     }
+
+
 
     public  void spinnermethod()
     {
@@ -438,7 +461,7 @@ public class Blackcofee extends Activity {
         LayoutInflater inflater1 = getLayoutInflater();
         alertLayout = inflater1.inflate(R.layout.popup, null);
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(Blackcofee.this,R.style.MyDialogTheme1);
+        AlertDialog.Builder alert = new AlertDialog.Builder(Blackcofee.this);
 
         alert.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
@@ -449,11 +472,14 @@ public class Blackcofee extends Activity {
 
                         if(spinertextval.equals("etwaterspeed")){
                             etwaterspeed.setText(val);
-                            et_milk_ml=(arraySpinner_alernate_values[val1]);
-                        } if(spinertextval.equals("etcoffeev")){
-                            et_coff_ml=(arraySpinner_alernate_values[val1]);
+                            et_milk_ml=(arraySpinner_alernate_values_hotwatr[val1]);
+                        }else if(spinertextval.equals("etcoffeev")){
+                            et_coff_ml=(arraySpinner_alernate_values_cofee[val1]);
                             etcoffeev.setText(val);
-                        }
+                        }/*else if(spinertextval.equals("etsugarv")){
+                            et_sug_ml=(arraySpinner_alernate_values_sugar[val1]);
+                            etsugarv.setText(val);
+                        }*/
 
                     }
                 });
@@ -467,7 +493,13 @@ public class Blackcofee extends Activity {
         dialog1.show();
 
         s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
-
+        if(spinertextval.equals("etwaterspeed")){
+            s.setAdapter(new MyAdapter1(Blackcofee.this, R.layout.spinner_item, arraySpinner_hotwater));
+        }else if(spinertextval.equals("etcoffeev")){
+            s.setAdapter(new MyAdapter1(Blackcofee.this, R.layout.spinner_item, arraySpinner_coffe));
+        }/*else if(spinertextval.equals("etsugarv")){
+            s.setAdapter(new MyAdapter1(Blackcofee.this, R.layout.spinner_item, arraySpinner_sugar));
+        }*/
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.65);
         int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.35);
         dialog1.getWindow().setLayout(width, height);
@@ -521,9 +553,6 @@ public class Blackcofee extends Activity {
                                         Toast.makeText(Blackcofee.this, "Data Received", Toast.LENGTH_SHORT).show();
 
                                     }
-
-
-
                                 }
                             });
                             break;
@@ -540,26 +569,29 @@ public class Blackcofee extends Activity {
                                 //setting the values for coffee andwater from spinner elements
                                     String bfull = message.substring(8, 12);
                                     String shalf = message.substring(13);
+
+                                    String bhalf1 = bhalf.replaceAll("[^0-9.]", "");
                                     String z11 = bfull.replaceAll("[^0-9.]", "");
                                     String bfull1 = shalf.replaceAll("[^0-9.]", "");
 
-                                    for (int j = 0; j <= arraySpinner_alernate_values.length; j++) {
-                                        if (arraySpinner_alernate_values[j].equals(z11)) {
-                                            etcoffeev.setText(arraySpinner[j]);
-
-                                        }  if (arraySpinner_alernate_values[j].equals(bfull1)) {
-                                            etwaterspeed.setText(arraySpinner[j]);
+                                    for (int j = 0; j <= arraySpinner_alernate_values_cofee.length; j++) {
+                                        if (arraySpinner_alernate_values_cofee[j].equals(z11)) {
+                                            etcoffeev.setText(arraySpinner_coffe[j]);
                                         }
+                                        if (arraySpinner_alernate_values_hotwatr[j].equals(bfull1)) {
+                                            etwaterspeed.setText(arraySpinner_hotwater[j]);
+                                        }
+                                      /*  if (arraySpinner_alernate_values_sugar[j].equals(bhalf1)) {
+                                            etsugarv.setText(arraySpinner_sugar[j]);
+                                        }*/
                                     }
+
 
 
 
                                 }
                             });
                         }
-
-
-
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -570,8 +602,6 @@ public class Blackcofee extends Activity {
 
         }
     };
-
-
 
 
     //Adding zero if input datalength less than 4
@@ -614,7 +644,38 @@ public class Blackcofee extends Activity {
 
     }
 
+    public class MyAdapter1 extends ArrayAdapter {
+        private Context context;
+        public MyAdapter1(Context context, int textViewResourceId, String[] objects) {
 
+            super(context, textViewResourceId, objects);
+
+        }
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.spinner_item, parent, false);
+            TextView tvLanguage = (TextView) layout.findViewById(R.id.textView);
+            if(spinertextval.equals("etwaterspeed")){
+                tvLanguage.setText(arraySpinner_hotwater[position]);
+            }else if(spinertextval.equals("etcoffeev")){
+                tvLanguage.setText(arraySpinner_coffe[position]);
+            }/*else if(spinertextval.equals("etsugarv")){
+                tvLanguage.setText(arraySpinner_sugar[position]);
+            }*/
+            return layout;
+        }
+
+        // It gets a View that displays in the drop down popup the data at the specified position
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+        // It gets a View that displays the data at the specified position
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+    }
 
 }
 

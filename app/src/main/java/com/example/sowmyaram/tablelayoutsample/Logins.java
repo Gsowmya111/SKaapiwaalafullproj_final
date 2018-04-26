@@ -146,13 +146,9 @@ public class Logins extends Activity {
                         byte[] theByteArray = bytesToSend1.getBytes();
                         String data = new String(theByteArray);
                         Btconnection.sendbt(data);
-                       // Toast.makeText(Logins.this, "DCN cmd sent", Toast.LENGTH_SHORT).show();
-
                     }
                 }catch (Exception e) {
                     e.printStackTrace();
-                   // Toast.makeText(Logins.this, "Connection Problem", Toast.LENGTH_SHORT).show();
-
                 }
                 return true;
             }
@@ -182,21 +178,7 @@ public class Logins extends Activity {
                System.exit(0);
            }
 
-
-            /*if (Btconnection.bs.isConnected()) {
-                try {
-                    Btconnection.bs.close();
-
-                } catch (IOException e) {
-
-                    //e.printStackTrace();
-                }*/
-
-
         } catch (Exception e) {
-
-          //  Toast.makeText(Logins.this, "Connection Problem!! Device not connected", Toast.LENGTH_SHORT).show();
-            // e.printStackTrace();
         }
     }
 

@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.text.Spanned;
 import android.text.method.DigitsKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -35,8 +38,16 @@ import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.half_full_cmd
 import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.set_cmd_full_half;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_hotwatr;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_sugar;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_tea;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_hotwater;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_milk;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_sugar;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_tea;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.et_coff_ml;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.et_milk_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_sug_ml;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.s;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.spinertextval;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.val;
@@ -105,7 +116,6 @@ public class Blacktea extends Activity {
           //  Toast.makeText(Blacktea.this, "Connection Problem", Toast.LENGTH_SHORT).show();
         }
 
-        //making edittext to take data in 0.0 format
         etsugarv.setFilters(new InputFilter[] {
                 new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
                     int beforeDecimal = 2, afterDecimal = 1;
@@ -138,10 +148,11 @@ public class Blacktea extends Activity {
                 }
         });
 
+
         //making edittext to take data in 0.0 format
         etteaval.setFilters(new InputFilter[] {
                 new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
-                    int beforeDecimal = 2, afterDecimal = 1;
+                    int beforeDecimal = 3, afterDecimal = 1;
 
                     @Override
                     public CharSequence filter(CharSequence source, int start, int end,
@@ -174,7 +185,7 @@ public class Blacktea extends Activity {
         //making edittext to take data in 0.0 format
         etwaterspeed.setFilters(new InputFilter[] {
                 new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
-                    int beforeDecimal = 2, afterDecimal = 1;
+                    int beforeDecimal = 3, afterDecimal = 1;
 
                     @Override
                     public CharSequence filter(CharSequence source, int start, int end,
@@ -216,12 +227,13 @@ public class Blacktea extends Activity {
                 try{
                 if ( etsugarv.length()!=0  && etteaval.length()!=0  &&etwaterspeed.length()!=0) {
 
-                    if (etsugarv.getText().toString().contains(".")) {
+                  //  if (etsugarv.getText().toString().contains(".")) {
 
 
                         String bytesToSend1 = set_cmd_full_half;
                         theByteArray = bytesToSend1.getBytes();
 
+                      //   bytesToSend = et_sug_ml.getBytes();
                         bytesToSend = etsugarv.getText().toString().getBytes();
                         zero();
                         bytesToSend4 = ",";
@@ -254,7 +266,7 @@ public class Blacktea extends Activity {
                         /////////////////////////////////////////////////
 
 
-                        bytesToSend = et_milk_ml.getBytes();
+                        bytesToSend = et_coff_ml.getBytes();
                         zero();
 
 
@@ -283,7 +295,7 @@ public class Blacktea extends Activity {
 /////////////////////////////////////////////////////////////////////*B,00.0,00.0,00.0,00.0,000#
 
 
-                        bytesToSend = et_coff_ml.getBytes();
+                        bytesToSend = et_milk_ml.getBytes();
                         zero();
                         bytesToSend4 = "#\n";
                         theByteArray3 = bytesToSend4.getBytes();
@@ -306,7 +318,7 @@ public class Blacktea extends Activity {
 /////////////////////////////////////////////////////////////////
 
 
-                    }
+                   // }
                 }
                 else
                 {
@@ -405,7 +417,15 @@ public class Blacktea extends Activity {
                 spinnermethod();
             }
         });
-
+     /*   etsugarv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etsugarv.setText("");
+                spinertextval="etsugarv";
+                spinnermethod();
+            }
+        });
+*/
 
     }
 
@@ -415,7 +435,7 @@ public class Blacktea extends Activity {
         LayoutInflater inflater1 = getLayoutInflater();
         alertLayout = inflater1.inflate(R.layout.popup, null);
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(Blacktea.this,R.style.MyDialogTheme1);
+        AlertDialog.Builder alert = new AlertDialog.Builder(Blacktea.this);
 
         alert.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
@@ -426,11 +446,14 @@ public class Blacktea extends Activity {
 
                         if(spinertextval.equals("etteaval")){
                             etteaval.setText(val);
-                            et_milk_ml=(arraySpinner_alernate_values[val1]);
+                            et_coff_ml=(arraySpinner_alernate_values_tea[val1]);
                         } if(spinertextval.equals("etwaterspeed")){
-                            et_coff_ml=(arraySpinner_alernate_values[val1]);
+                            et_milk_ml=(arraySpinner_alernate_values_hotwatr[val1]);
                             etwaterspeed.setText(val);
-                        }
+                        } /*if(spinertextval.equals("etsugarv")){
+                            et_sug_ml=(arraySpinner_alernate_values_sugar[val1]);
+                            etsugarv.setText(val);
+                        }*/
 
                     }
                 });
@@ -444,6 +467,13 @@ public class Blacktea extends Activity {
         dialog1.show();
 
         s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
+        if(spinertextval.equals("etteaval")){
+            s.setAdapter(new MyAdapter(Blacktea.this, R.layout.spinner_item, arraySpinner_tea));
+        }else if(spinertextval.equals("etwaterspeed")){
+            s.setAdapter(new MyAdapter(Blacktea.this, R.layout.spinner_item, arraySpinner_hotwater));
+        }/*else if(spinertextval.equals("etsugarv")){
+            s.setAdapter(new MyAdapter(Blacktea.this, R.layout.spinner_item, arraySpinner_sugar));
+        }*/
 
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.65);
         int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.35);
@@ -510,19 +540,29 @@ public class Blacktea extends Activity {
                                     //setting tea and water value from spinner
                                     String bfull = message.substring(8, 12);
                                     String shalf = message.substring(13);
+
+                                    String bhalf1 = bhalf.replaceAll("[^0-9.]", "");
                                     String z11 = shalf.replaceAll("[^0-9.]", "");
                                     String bfull1 = bfull.replaceAll("[^0-9.]", "");
 
-                                    for (int j = 0; j <= arraySpinner_alernate_values.length; j++) {
-                                        if (arraySpinner_alernate_values[j].equals(bfull1)) {
-                                            etteaval.setText(arraySpinner[j]);
+                                   // if(bfull1!=null||z11!=null) {
 
-                                        }  if (arraySpinner_alernate_values[j].equals(z11)) {
-                                            etwaterspeed.setText(arraySpinner[j]);
+                                        for (int j = 0; j <= arraySpinner_alernate_values_tea.length; j++) {
+                                            if (arraySpinner_alernate_values_tea[j].equals(bfull1)) {
+                                                etteaval.setText(arraySpinner_tea[j]);
+                                            }
+                                             if (arraySpinner_alernate_values_hotwatr[j].equals(z11)) {
+                                                etwaterspeed.setText(arraySpinner_hotwater[j]);
+                                            }
+                                            /*if (arraySpinner_alernate_values_sugar[j].equals(bhalf1)) {
+                                                etsugarv.setText(arraySpinner_sugar[j]);
+                                            }*/
                                         }
-                                    }
 
+                                       /* for (int j = 0; j <= arraySpinner_alernate_values_hotwatr.length; j++) {
 
+                                        }*/
+                                   // }
 
                                 }
                             });
@@ -576,6 +616,44 @@ public class Blacktea extends Activity {
         }
 
     }
+
+    public class MyAdapter extends ArrayAdapter {
+        private Context context;
+        public MyAdapter(Context context, int textViewResourceId, String[] objects) {
+
+            super(context, textViewResourceId, objects);
+
+        }
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.spinner_item, parent, false);
+            TextView tvLanguage = (TextView) layout.findViewById(R.id.textView);
+            if(spinertextval.equals("etteaval")){
+                tvLanguage.setText(arraySpinner_tea[position]);
+            }else if(spinertextval.equals("etwaterspeed")){
+                tvLanguage.setText(arraySpinner_hotwater[position]);
+            }/*else if(spinertextval.equals("etsugarv")){
+                tvLanguage.setText(arraySpinner_sugar[position]);
+            }*/
+
+            // tvLanguage.setText(spinner2_arr.get(position));
+            //tvLanguage.setTextColor(Color.rgb(75, 180, 225));
+            return layout;
+        }
+
+        // It gets a View that displays in the drop down popup the data at the specified position
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+        // It gets a View that displays the data at the specified position
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+    }
+
+
 }
 
 

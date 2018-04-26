@@ -49,20 +49,20 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
             <Button
                 android:id="@+id/buttonmaster"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/optbck1"
                 android:ems="10"
 
@@ -75,7 +75,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
 
         </LinearLayout>
@@ -93,20 +93,20 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
             <Button
                 android:id="@+id/buttontoday"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/optbck1"
                 android:ems="10"
 
@@ -119,7 +119,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
 
         </LinearLayout>
@@ -139,20 +139,20 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
             <Button
                 android:id="@+id/butonusers"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/optbck1"
                 android:ems="10"
 
@@ -165,7 +165,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
 
         </LinearLayout>
@@ -183,20 +183,20 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
             <Button
                 android:id="@+id/buttondown"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/optbck1"
                 android:ems="10"
 
@@ -209,7 +209,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
 
         </LinearLayout>
@@ -227,20 +227,20 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
             <Button
                 android:id="@+id/buttoneraseall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/optbck1"
                 android:ems="10"
 
@@ -253,7 +253,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
 
         </LinearLayout>
@@ -272,20 +272,20 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
 
             <Button
                 android:id="@+id/button_dev_nam"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/optbck1"
                 android:ems="10"
 
@@ -298,11 +298,53 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.7" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:orientation="vertical"
+            android:weightSum="3">
 
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.7" />
+
+            <Button
+                android:id="@+id/button_default_settings"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/optbck1"
+                android:ems="10"
+
+                android:text="Default Settings"
+                android:textSize="@dimen/campaign_textfontsize"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.7" />
+
+
+        </LinearLayout>
 
 
 

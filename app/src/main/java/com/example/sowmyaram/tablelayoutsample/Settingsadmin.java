@@ -33,7 +33,7 @@ public class Settingsadmin extends Activity {
     DataBaseHandler db = null;
     String incoming_data, bytesToSend1;
     BufferedReader br;
-    Button bmaster, btoday, bteraseall, bcreteuser, bdownl,devname;
+    Button bmaster, btoday, bteraseall, bcreteuser, bdownl,devname,default_settings;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class Settingsadmin extends Activity {
         bcreteuser = (Button) findViewById(R.id.butonusers);
         bdownl = (Button) findViewById(R.id.buttondown);
         devname = (Button) findViewById(R.id.button_dev_nam);
+        default_settings = (Button) findViewById(R.id.button_default_settings);
         Button bback = (Button) findViewById(R.id.buttonback);
 
         try {
@@ -120,6 +121,17 @@ public class Settingsadmin extends Activity {
                 public void onClick(View v) {
 
                     Intent i1 = new Intent(Settingsadmin.this, Device_Name.class);
+                    startActivity(i1);
+                    finish();
+                }
+            });
+
+
+            default_settings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i1 = new Intent(Settingsadmin.this, Default_Setting.class);
                     startActivity(i1);
                     finish();
                 }

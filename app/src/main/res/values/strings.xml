@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">TableLayoutsample</string>
     <string name="stop_name">\ns\nt\no\np\n</string>
-
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>>
 
 
     <string-array name="arraySpinner">

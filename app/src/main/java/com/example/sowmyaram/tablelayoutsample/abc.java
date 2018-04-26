@@ -1,472 +1,106 @@
 /*
-package com.example.sowmyaram.tablelayoutsample;
+package in.cloud.www.counterex;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.CountDownTimer;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.util.Set;
-import java.util.UUID;
+import com.example.sowmyaram.tablelayoutsample.R;
 
-*/
-/**
- * Created by vidya on 27-05-2017.
- *//*
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
-
-public class abc {
-}
-
-
-
-
-public class Btconnection extends AppCompatActivity implements   Runnable{
-
-
-    private static UUID myUUID=UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    //public static String macId = "00:14:01:25:16:43";
-
-
-    BluetoothAdapter bluetoothAdapter=BluetoothAdapter.getDefaultAdapter();
-    static BluetoothDevice bd=null;
-    static BluetoothSocket bs=null;
-    static boolean btconnected=false;
-    BufferedReader br=null;
-    static Handler handler=null;
-    static boolean in=false;
-    static boolean ou=false;
-    //static BufferedWriter bw=null;
-    static OutputStream btoutstream=null;
-    private static final String TAG = null;
-    static  BluetoothDevice device;
-    String address;
-    static String mac;
-    private int size;
-
-    */
-/*public void hand(Handler hand)
-{
-    handler=hand;
-}*//*
+public class abc extends AppCompatActivity {
+    private final int REQ_CODE_SPEECH_INPUT = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.device_settings);
+
+        //Get reference of the XML layout's widgets
+
+        askSpeechInput();
 
     }
+    private void askSpeechInput() {
+        long millisInFuture = 25000;
+        long countDownInterval = 1000;
+        final TextView tView = (TextView) findViewById(R.id.tv);
+        new CountDownTimer(millisInFuture, countDownInterval) {
+            public void onTick(long millisUntilFinished) {
 
-    public static void sendbt(String data)
-    {
-        try {
+                Timer t = new Timer();
 
-            btoutstream.write(data.getBytes(),0,data.length());
-            btoutstream.flush();
-        } catch (IOException e) {
+                t.scheduleAtFixedRate(
+                        new TimerTask() {
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
 
-            btconnected=false;
-            bd=null;
-            bs=null;
-            e.printStackTrace();
-        }
-    }
+                                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
-    public static boolean in()
+                                        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                                                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                                        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+                                        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                                                "Hi speak something");
+                                        try {
 
-    {
-        return in;
-    }
-    public static boolean out()
-    {
-        return  ou;
-    }
+                                            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+                                        } catch (ActivityNotFoundException a) {
 
-    */
-/**
-     * When an object implementing interface <code>Runnable</code> is used
-     * to create a thread, starting the thread causes the object's
-     * <code>run</code> method to be called in that separately executing
-     * thread.
-     * <p>
-     * The general contract of the method <code>run</code> is that it may
-     * take any action whatsoever.
-     *
-     * @see Thread#run()
-     *//*
+                                        }
+                                    }
+                                });
 
-    @Override
-    public void run() {
-        Log.d("TAG","CONNC");
-      */
-/*try {
-            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
-            if (devices.size() > 0) {
-                for (BluetoothDevice device : devices) {
-                    mac = device.getAddress();
-                    //connect(mac);
-                }
-                bd = bluetoothAdapter.getRemoteDevice(mac);
+                            }
+                        },
+                        0,      // run first occurrence immediatetly
+                        7000);
             }
 
-        }catch (Exception e) {
-            bd=null;
-            bs=null;
-            btconnected=false;
-            e.printStackTrace();
+            public void onFinish() {
+                //Do something when count down finished
+                tView.setText("Time over...");
+            }
+        }.start();
 
-        }*//*
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        final TextView b = (TextView) findViewById(R.id.textView);
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
 
+                if (resultCode == RESULT_OK && null != data) {
 
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String voiceInput =result.get(0);
+                    if(voiceInput.contains("casio")){
+                        b.setText("hii megha");
+                        //  iv.setImageResource(R.drawable.abc);
+                        String toSpeak = b.getText().toString();
+                        Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
+                        // t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                        //  voiceInput.setText(result.get(0));
+                        //if (voiceInput.getText().toString().trim().equals("megha")) {
 
-
-
-
-
-
-
-
-        try {
-            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
-            if (devices.size() > 0) {
-                for (BluetoothDevice device : devices) {
-                    String name = device.getName();
-                    if (name != null && name.contains("HC-05")) {
-
-                        mac = device.getAddress();
-                        //connect(mac);
                     }
-                }
-                bd = bluetoothAdapter.getRemoteDevice(mac);
-            }
-
-        }catch (Exception e) {
-            bd=null;
-            bs=null;
-            btconnected=false;
-            e.printStackTrace();
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      */
-/*  try {
-            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
-
-
-            List<String> s = new ArrayList<String>();
-            for(BluetoothDevice bt : devices)
-                s.add(bt.getName());
-                Iterator<String> itr=s.iterator();
-
-            int i=0;
-            while(i<s.size())
-            {
-                mac=s.get(i);
-                i++;
-            }
-
-           // if (devices.size() > 0) {
-                //for (BluetoothDevice device : devices) {
-                    //mac = device.getAddress();
-
-               // }
-                bd = bluetoothAdapter.getRemoteDevice(mac);
-
-
-        }catch (Exception e) {
-            bd=null;
-            bs=null;
-            btconnected=false;
-            e.printStackTrace();
-
-        }
-
-*//*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   */
-/*  try {
-            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
-
-            if(devices.isEmpty())
-            {
-                Toast.makeText(this, "Please pair the device first", Toast.LENGTH_SHORT).show();
-            }
-            // if (devices.size() > 0) {
-
-            else{
-                for (BluetoothDevice iterator : devices) {
-
-                    mac=iterator.getAddress();
-
-                    // mac = device.getAddress();
-                    boolean found = true;
                     break;
-                    //  mac = device.getAddress();
-                    //connect(mac);
-                }
-                bd = bluetoothAdapter.getRemoteDevice(mac);
-            }
 
-        }catch (Exception e) {
-            bd=null;
-            bs=null;
-            btconnected=false;
-            e.printStackTrace();
-
-        }*//*
-
-
-
-
-        try {
-            // bs = bd.createInsecureRfcommSocketToServiceRecord(myUUID);
-            bs = bd.createRfcommSocketToServiceRecord(myUUID);
-            bluetoothAdapter.cancelDiscovery();
-            bs.connect();
-            btconnected = true;
-
-
-            while (true)
-            {
-                if (bs.isConnected()) {
-                    br = new BufferedReader(new InputStreamReader(bs.getInputStream()));
-                    in = true;
-                    btoutstream = bs.getOutputStream();
-                    ou = true;
-                    String btdata = br.readLine();
-                    handler.obtainMessage(0, 0, 0, btdata).sendToTarget();
                 }
             }
-
-        } catch (Exception e) {
-            // System.out.println("Error " + e.getMessage());
-            //return null;
-
-            btconnected=false;
-            bd=null;
-            bs=null;
-            return;
         }
     }
 
-
-}
-
-
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ///////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- /* try {
-          bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-          Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
-
-
-        if (devices.size() > 0) {
-        for (BluetoothDevice device : devices) {
-        String name = device.getName();
-        if (name != null && name.equals("RNBT-B441")) {
-
-        mac = device.getAddress();
-        break;
-        //connect(mac);
-        }
-        }
-        bd = bluetoothAdapter.getRemoteDevice(mac);
-
-        }
-
-        } catch (Exception e) {
-        bd = null;
-        bs = null;
-        btconnected = false;
-        e.printStackTrace();
-
-        }
-
-
-        try {
-        // bs = bd.createInsecureRfcommSocketToServiceRecord(myUUID);
-        bs = bd.createRfcommSocketToServiceRecord(myUUID);
-        bluetoothAdapter.cancelDiscovery();
-        // bs.connect();
-        // btconnected = true;
-
-
-        if (btconnected = true && bs.isConnected()) {
-        if (bs.isConnected()) {
-        br = new BufferedReader(new InputStreamReader(bs.getInputStream()));
-        in = true;
-        btoutstream = bs.getOutputStream();
-        ou = true;
-        String btdata = br.readLine();
-        handler.obtainMessage(0, 0, 0, btdata).sendToTarget();
-        }
-        } else {
-        try {
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
-
-
-        if (devices.size() > 0) {
-        for (BluetoothDevice device : devices) {
-        String name = device.getName();
-        if (name != null && name.equals("HC-05Test")) {
-
-        mac = device.getAddress();
-        //connect(mac);
-        }
-        }
-        bd = bluetoothAdapter.getRemoteDevice(mac);
-
-        abc();
-
-
-        }
-
-        } catch (Exception e) {
-        bd = null;
-        bs = null;
-        btconnected = false;
-        e.printStackTrace();
-
-        }
-
-        }
-
-
-        } catch (Exception e) {
-        // System.out.println("Error " + e.getMessage());
-        //return null;
-
-        btconnected = false;
-        bd = null;
-        bs = null;
-        return;
-        }
-        }
-
-
-        void abc() {
-        try {
-        // bs = bd.createInsecureRfcommSocketToServiceRecord(myUUID);
-        bs = bd.createRfcommSocketToServiceRecord(myUUID);
-        bluetoothAdapter.cancelDiscovery();
-        bs.connect();
-        btconnected = true;
-
-
-        while (true) {
-        if (bs.isConnected()) {
-        br = new BufferedReader(new InputStreamReader(bs.getInputStream()));
-        in = true;
-        btoutstream = bs.getOutputStream();
-        ou = true;
-        String btdata = br.readLine();
-        handler.obtainMessage(0, 0, 0, btdata).sendToTarget();
-        }
-        }
-
-        } catch (Exception e) {
-        // System.out.println("Error " + e.getMessage());
-        //return null;
-
-        btconnected = false;
-        bd = null;
-        bs = null;
-        return;
-        }
-        }
-
-*/
+}*/

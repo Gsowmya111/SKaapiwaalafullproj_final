@@ -137,6 +137,7 @@
                 android:textSize="@dimen/campaign2"
                 android:layout_weight="1" />
 
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"

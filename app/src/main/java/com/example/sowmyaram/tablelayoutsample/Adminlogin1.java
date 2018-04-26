@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Environment;
 import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -64,7 +64,7 @@ public class Adminlogin1 extends Activity {
         db.getWritableDatabase();
 
 
-        //   pullout();
+           pullout();
         tfor = (TextView) findViewById(R.id.textViewforgotpaswd);
         editTextUserName = (EditText) findViewById(R.id.etusernameadmin1);
         editTextPassword = (EditText) findViewById(R.id.etpaswdadmin1);
@@ -295,16 +295,16 @@ public class Adminlogin1 extends Activity {
         super.onPause();
     }
 
- /*  public void pullout() {
+   public void pullout() {
 
         //db.open();
 
         File f = new File("/data/data/" + this.getPackageName() + "/databases/" + "sample" + ".db");
-     /*   FileInputStream fin = null;
+        FileInputStream fin = null;
         FileOutputStream fout = null;
         try {
             fin = new FileInputStream(f);
-            fout = new FileOutputStream(Environment.getExternalStorageDirectory() + "/" + "sowmya.db");
+            fout = new FileOutputStream(Environment.getExternalStorageDirectory() + "/" + "sow.db");
             int i = 0;
             while ((i = fin.read()) != -1) {
                 fout.write(i);
@@ -318,7 +318,7 @@ public class Adminlogin1 extends Activity {
             Toast.makeText(this.getApplicationContext(), "exception occurs in creating dump!!", Toast.LENGTH_LONG)
                     .show();}
 
-    }*/
+    }
 
 
 }

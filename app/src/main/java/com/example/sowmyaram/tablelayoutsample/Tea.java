@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +19,10 @@ import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -44,8 +47,18 @@ import static com.example.sowmyaram.tablelayoutsample.Halfcup_page.set_cmd_full_
 import static com.example.sowmyaram.tablelayoutsample.R.id.spiner;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_cofee;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_milk;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_sugar;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_alernate_values_tea;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_coffe;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_hotwater;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_milk;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_sugar;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.arraySpinner_tea;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.et_coff_ml;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.et_milk_ml;
+import static com.example.sowmyaram.tablelayoutsample.Spinner.et_sug_ml;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.s;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.spinertextval;
 import static com.example.sowmyaram.tablelayoutsample.Spinner.val;
@@ -71,19 +84,6 @@ public class Tea extends Activity {
     LinearLayout lcon;
     Spinner spinerr;
 
-
-   /* String[] arraySpinner = new String[] {"2","4", "6", "8", "10","12","14","16","18","20","22","24",
-            "26","28","30","32","34","36","40","42","44","46","48","50"};*/
-   /* String[] arraySpinner_alernate_values = new String[] {"1.2","1.4", "1.6", "1.8", "2.0","2.2","2.3","2.5","2.6","2.8","2.7","2.9",
-            "3.0","3.1","3.2","3.3","3.4","3.5","3.6","3.7","3.8","3.9","4.1","4.2"};*/
-
-
-
-
-   /* private static final Set<String> arraySpinner = new HashSet<String>(Arrays.asList(
-            new String[] {"2","4", "6", "8", "10","12","14","16","18","20","22","24",
-                    "26","28","30","32","34","36","40","42","44","46","48","50"}));*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,32 +102,32 @@ public class Tea extends Activity {
         etcoffeev= (EditText) findViewById(R.id.etteaval);
         etmilkdelay= (EditText) findViewById(R.id.etmilkdelay);
         etmilkval= (EditText) findViewById(R.id.etmilkval);
-       // etmilkspeed= (EditText) findViewById(R.id.etmilkspeed);
+        // etmilkspeed= (EditText) findViewById(R.id.etmilkspeed);
         bread = (Button) findViewById(R.id.buttonread);
         bset = (Button) findViewById(R.id.buttonset);
         bback = (Button) findViewById(R.id.buttonback);
         lcon = (LinearLayout) findViewById(R.id.lcon);
         etcoffeev.clearFocus();
 
-      //To send *RF# cmd while opening blacktea page and if bluetooth is connected then kaapiwaala tab will turn to green
+        //To send *RF# cmd while opening blacktea page and if bluetooth is connected then kaapiwaala tab will turn to green
         try{
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if(Btconnection.btconnected=true&& Btconnection.bs.isConnected()) {
-                    lcon.setBackgroundResource(R.drawable.kapiconect);
-                }
-                else
-                {
-                    lcon.setBackgroundResource(R.drawable.kaapiwala_tab);
-                }
-                String bytesToSend1 = half_full_cmd;
-                byte[] theByteArray = bytesToSend1.getBytes();
-                String data = new String(theByteArray);
-                Btconnection.sendbt(data);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(Btconnection.btconnected=true&& Btconnection.bs.isConnected()) {
+                        lcon.setBackgroundResource(R.drawable.kapiconect);
+                    }
+                    else
+                    {
+                        lcon.setBackgroundResource(R.drawable.kaapiwala_tab);
+                    }
+                    String bytesToSend1 = half_full_cmd;
+                    byte[] theByteArray = bytesToSend1.getBytes();
+                    String data = new String(theByteArray);
+                    Btconnection.sendbt(data);
 
-            }
-        });
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
             //Toast.makeText(Tea.this, "Connection Problem", Toast.LENGTH_SHORT).show();
@@ -160,7 +160,6 @@ public class Tea extends Activity {
                                 return "";
                             }
                         }
-
                         return super.filter(source, start, end, dest, dstart, dend);
                     }
                 }
@@ -168,7 +167,7 @@ public class Tea extends Activity {
         //making edittext to take data in 0.0 format
         etcoffeev.setFilters(new InputFilter[] {
                 new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
-                    int beforeDecimal = 2, afterDecimal = 1;
+                    int beforeDecimal = 3, afterDecimal = 1;
 
                     @Override
                     public CharSequence filter(CharSequence source, int start, int end,
@@ -183,7 +182,8 @@ public class Tea extends Activity {
                             if (temp.length() > beforeDecimal) {
                                 return "";
                             }
-                        }  else if (temp.length() > 5) {
+                        }
+                        else if (temp.length() > 5) {
                             temp = null;
                             temp = (String) source;
                         }else {
@@ -232,7 +232,7 @@ public class Tea extends Activity {
         //making edittext to take data in 0.0 format
         etmilkval.setFilters(new InputFilter[] {
                 new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
-                    int beforeDecimal = 2, afterDecimal = 1;
+                    int beforeDecimal = 3, afterDecimal = 1;
 
                     @Override
                     public CharSequence filter(CharSequence source, int start, int end,
@@ -270,129 +270,126 @@ public class Tea extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                if ( etsugarv.length()!=0 && etcoffeev.length()!=0 &&etmilkval.length()!=0 && etmilkdelay.length()!=0  ) {
+                    if ( etsugarv.length()!=0 && etcoffeev.length()!=0 &&etmilkval.length()!=0 && etmilkdelay.length()!=0  ) {
 
-                    if (etsugarv.getText().toString().contains(".")) {
-
-
-                        String bytesToSend1 = set_cmd_full_half;
-                        theByteArray = bytesToSend1.getBytes();
-
-                        bytesToSend = etsugarv.getText().toString().getBytes();
-                        zero();
-                        bytesToSend4 = ",";
-                        theByteArray3 = bytesToSend4.getBytes();
-                        output = new ByteArrayOutputStream();
-                        //*G,
-                        try {
-                            output.write(theByteArray);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        //00
-                        try {
-                            output.write(a1);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        //,
-                        try {
-                            output.write(theByteArray3);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        byte[] out = output.toByteArray();
-                        String data = new String(out);
-                        Btconnection.sendbt(data);
+                      //  if (etsugarv.getText().toString().contains(".")) {
 
 
-                        /////////////////////////////////////////////////
+                            String bytesToSend1 = set_cmd_full_half;
+                            theByteArray = bytesToSend1.getBytes();
+                          //  bytesToSend = et_sug_ml.getBytes();
+                            bytesToSend = etsugarv.getText().toString().getBytes();
+                            zero();
+                            bytesToSend4 = ",";
+                            theByteArray3 = bytesToSend4.getBytes();
+                            output = new ByteArrayOutputStream();
+                            //*G,
+                            try {
+                                output.write(theByteArray);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            //00
+                            try {
+                                output.write(a1);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            //,
+                            try {
+                                output.write(theByteArray3);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
-                        bytesToSend = et_coff_ml.getBytes();
-                    //    bytesToSend = etcoffeev.getText().toString().getBytes();
-                        zero();
+                            byte[] out = output.toByteArray();
+                            String data = new String(out);
+                            Btconnection.sendbt(data);
 
 
-                        bytesToSend4 = ",";
-                        theByteArray3 = bytesToSend4.getBytes();
+                            /////////////////////////////////////////////////
 
-                        output = new ByteArrayOutputStream();
+                            bytesToSend = et_coff_ml.getBytes();
+                            //    bytesToSend = etcoffeev.getText().toString().getBytes();
+                            zero();
+                            bytesToSend4 = ",";
+                            theByteArray3 = bytesToSend4.getBytes();
+                            output = new ByteArrayOutputStream();
 
-                        //00
-                        try {
-                            output.write(a1);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        //,
-                        try {
-                            output.write(theByteArray3);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                            //00
+                            try {
+                                output.write(a1);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            //,
+                            try {
+                                output.write(theByteArray3);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
-                        out = output.toByteArray();
-                        String data1 = new String(out);
-                        Btconnection.sendbt(data1);
+                            out = output.toByteArray();
+                            String data1 = new String(out);
+                            Btconnection.sendbt(data1);
 
 /////////////////////////////////////////////////////////////////////*B,00.0,00.0,00.0,00.0,000#
 
 
-                        bytesToSend = etmilkdelay.getText().toString().getBytes();
-                        zero();
+                            bytesToSend = etmilkdelay.getText().toString().getBytes();
+                            zero();
 
 
-                        bytesToSend4 = ",";
-                        theByteArray3 = bytesToSend4.getBytes();
-                        output = new ByteArrayOutputStream();
+                            bytesToSend4 = ",";
+                            theByteArray3 = bytesToSend4.getBytes();
+                            output = new ByteArrayOutputStream();
 
-                        //00
-                        try {
-                            output.write(a1);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        //,
-                        try {
-                            output.write(theByteArray3);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                            //00
+                            try {
+                                output.write(a1);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            //,
+                            try {
+                                output.write(theByteArray3);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
-                        out = output.toByteArray();
-                        String data2 = new String(out);
-                        Btconnection.sendbt(data2);
+                            out = output.toByteArray();
+                            String data2 = new String(out);
+                            Btconnection.sendbt(data2);
 
 /////////////////////////////////////////////////////////////////
-                        bytesToSend = et_milk_ml.getBytes();
-                       // bytesToSend = etmilkval.getText().toString().getBytes();
-                        zero();
+                            bytesToSend = et_milk_ml.getBytes();
+                            // bytesToSend = etmilkval.getText().toString().getBytes();
+                            zero();
 
 
-                        bytesToSend4 = "#\n";
-                        theByteArray3 = bytesToSend4.getBytes();
-                        output = new ByteArrayOutputStream();
+                            bytesToSend4 = "#\n";
+                            theByteArray3 = bytesToSend4.getBytes();
+                            output = new ByteArrayOutputStream();
 
-                        //00.0
-                        try {
-                            output.write(a1);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        //,
-                        try {
-                            output.write(theByteArray3);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                            //00.0
+                            try {
+                                output.write(a1);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            //,
+                            try {
+                                output.write(theByteArray3);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
-                        out = output.toByteArray();
-                        String data3 = new String(out);
-                        Btconnection.sendbt(data3);
+                            out = output.toByteArray();
+                            String data3 = new String(out);
+                            Btconnection.sendbt(data3);
 /////////////////////////////////////////////////////////////////
 
-                    }
+                     //   }
 
                    /* bytesToSend = etmilkspeed.getText().toString().getBytes();
                     zero2();
@@ -420,23 +417,21 @@ public class Tea extends Activity {
                     Btconnection.sendbt(data4);
 
                 */
-                }
-                else
-                {
-                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Tea.this);
-                    alertBuilder.setTitle("Invalid Data");
-                    alertBuilder.setMessage("Please, Enter data in 00.0 format");
-                    alertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    }
+                    else
+                    {
+                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Tea.this);
+                        alertBuilder.setTitle("Invalid Data");
+                        alertBuilder.setMessage("Please, Enter data in 00.0 format");
+                        alertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
 
-                        }
-                    });
-                    alertBuilder.create().show();
-                }
-
-
+                            }
+                        });
+                        alertBuilder.create().show();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     //Toast.makeText(Tea.this, "Connection Problem", Toast.LENGTH_SHORT).show();
@@ -453,14 +448,14 @@ public class Tea extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                String bytesToSend1 = half_full_cmd;
-                byte[] theByteArray = bytesToSend1.getBytes();
+                    String bytesToSend1 = half_full_cmd;
+                    byte[] theByteArray = bytesToSend1.getBytes();
 
-                String data= new String(theByteArray);
-                Btconnection.sendbt(data);
+                    String data= new String(theByteArray);
+                    Btconnection.sendbt(data);
                 } catch (Exception e) {
                     e.printStackTrace();
-                   // Toast.makeText(Tea.this, "Connection Problem", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(Tea.this, "Connection Problem", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -474,7 +469,6 @@ public class Tea extends Activity {
                     startActivity(i);
                     finish();
                 }else if(half_back.equals("fullcup_page")) {
-
                     Intent i = new Intent(Tea.this, FullCup_page.class);
                     startActivity(i);
                     finish();
@@ -487,27 +481,22 @@ public class Tea extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                String bytesToSend1 = "*CON#";
-                byte[] theByteArray = bytesToSend1.getBytes();
-                String data = new String(theByteArray);
-                Btconnection.sendbt(data);
+                    String bytesToSend1 = "*CON#";
+                    byte[] theByteArray = bytesToSend1.getBytes();
+                    String data = new String(theByteArray);
+                    Btconnection.sendbt(data);
                 } catch (Exception e) {
                     e.printStackTrace();
-                   // Toast.makeText(Tea.this, "Connection Problem", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(Tea.this, "Connection Problem", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
-
-
         etcoffeev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 etcoffeev.setText("");
                 spinertextval = "etcoffeev";
                 spinnermethod();
-
             }
         });
         etmilkval.setOnClickListener(new View.OnClickListener() {
@@ -519,7 +508,15 @@ public class Tea extends Activity {
             }
         });
 
-
+      /*  etsugarv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etsugarv.setText("");
+                spinertextval="etsugarv";
+                spinnermethod();
+            }
+        });
+*/
     }
 
     public  void spinnermethod()
@@ -527,36 +524,41 @@ public class Tea extends Activity {
         View alertLayout;
         LayoutInflater inflater1 = getLayoutInflater();
         alertLayout = inflater1.inflate(R.layout.popup, null);
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(Tea.this,R.style.MyDialogTheme1);
+        AlertDialog.Builder alert = new AlertDialog.Builder(Tea.this);
 
         alert.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                       val1 = s.getSelectedItemPosition();
+                        val1 = s.getSelectedItemPosition();
                         val = s.getSelectedItem().toString();
-
                         if(spinertextval.equals("etmilkval")){
                             etmilkval.setText(val);
-                          et_milk_ml=(arraySpinner_alernate_values[val1]);
+                            et_milk_ml=(arraySpinner_alernate_values_milk[val1]);
                         } if(spinertextval.equals("etcoffeev")){
-                            et_coff_ml=(arraySpinner_alernate_values[val1]);
+                            et_coff_ml=(arraySpinner_alernate_values_tea[val1]);
                             etcoffeev.setText(val);
                         }
-
+                       /* if(spinertextval.equals("etsugarv")){
+                            et_sug_ml=(arraySpinner_alernate_values_sugar[val1]);
+                            etsugarv.setText(val);
+                        }*/
                     }
                 });
-
-
-
-
         alert.setView(alertLayout);
         alert.setCancelable(true);
         final AlertDialog dialog1 = alert.create();
         dialog1.show();
+        s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
+        if(spinertextval.equals("etmilkval")){
+            s.setAdapter(new MyAdapter(Tea.this, R.layout.spinner_item, arraySpinner_milk));
+        }else if(spinertextval.equals("etcoffeev")){
+            s.setAdapter(new MyAdapter(Tea.this, R.layout.spinner_item, arraySpinner_tea));
+        }/*else if(spinertextval.equals("etsugarv")){
+            s.setAdapter(new MyAdapter(Tea.this, R.layout.spinner_item, arraySpinner_sugar));
+        }*/
 
-       s = (android.widget.Spinner) alertLayout.findViewById(R.id.spiner);
+
 
         int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.65);
         int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.35);
@@ -599,13 +601,13 @@ public class Tea extends Activity {
                                     // Toast.makeText(Logins.this,"incom1 "+message,Toast.LENGTH_LONG).show();
 
                                     if (message.equals("*CON#")) {
-                                       // Toast.makeText(Tea.this, "Device Connected", Toast.LENGTH_SHORT).show();
+                                        // Toast.makeText(Tea.this, "Device Connected", Toast.LENGTH_SHORT).show();
                                         lcon.setBackgroundResource(R.drawable.kapiconect);
                                     } else if (message.equals("*NOC#")) {
-                                       // Toast.makeText(Tea.this, "Device Busy,not connected", Toast.LENGTH_SHORT).show();
+                                        // Toast.makeText(Tea.this, "Device Busy,not connected", Toast.LENGTH_SHORT).show();
                                         lcon.setBackgroundResource(R.drawable.kaapiwala_tab);
                                     } else if (message.equals("*DCN#")) {
-                                       // Toast.makeText(Tea.this, "Device disconnected", Toast.LENGTH_SHORT).show();
+                                        // Toast.makeText(Tea.this, "Device disconnected", Toast.LENGTH_SHORT).show();
                                         lcon.setBackgroundResource(R.drawable.kaapiwala_tab);
                                     }
 
@@ -634,15 +636,23 @@ public class Tea extends Activity {
                                     String bfull = message.substring(8, 12);
                                     String z1 = message.substring(18);
 
+
                                     String z11 = z1.replaceAll("[^0-9.]", "");
                                     String bfull1 = bfull.replaceAll("[^0-9.]", "");
-                                    for (int j = 0; j <= arraySpinner_alernate_values.length; j++) {
-                                        if (arraySpinner_alernate_values[j].equals(bfull1)) {
-                                            etcoffeev.setText(arraySpinner[j]);
+                                    String bhalf1 = bhalf.replaceAll("[^0-9.]", "");
 
-                                        }  if (arraySpinner_alernate_values[j].equals(z11)) {
-                                            etmilkval.setText(arraySpinner[j]);
+                                    for (int j = 0; j <= arraySpinner_alernate_values_cofee.length; j++) {
+                                        if (arraySpinner_alernate_values_tea[j].equals(bfull1)) {
+                                            etcoffeev.setText(arraySpinner_tea[j]);
                                         }
+                                        if (arraySpinner_alernate_values_milk[j].equals(z11)) {
+                                            etmilkval.setText(arraySpinner_milk[j]);
+                                        }
+                                       /* if (arraySpinner_alernate_values_sugar[j].equals(bhalf1)) {
+                                            etsugarv.setText(arraySpinner_sugar[j]);
+                                        }*/
+
+
                                     }
 
 
@@ -655,7 +665,7 @@ public class Tea extends Activity {
 
                     } catch (Exception e) {
                         e.printStackTrace();
-                       // Toast.makeText(Tea.this, "Connection Problem", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(Tea.this, "Connection Problem", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -717,10 +727,54 @@ public class Tea extends Activity {
     }
 
 
+    public class MyAdapter extends ArrayAdapter {
+        private Context context;
+        public MyAdapter(Context context, int textViewResourceId, String[] objects) {
+
+            super(context, textViewResourceId, objects);
+
+        }
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.spinner_item, parent, false);
+            TextView tvLanguage = (TextView) layout.findViewById(R.id.textView);
+            if(spinertextval.equals("etmilkval")){
+                tvLanguage.setText(arraySpinner_milk[position]);
+            }else if(spinertextval.equals("etcoffeev")){
+                tvLanguage.setText(arraySpinner_tea[position]);
+            }/*else if(spinertextval.equals("etsugarv")){
+                tvLanguage.setText(arraySpinner_sugar[position]);
+            }*/
+
+            // tvLanguage.setText(spinner2_arr.get(position));
+            //tvLanguage.setTextColor(Color.rgb(75, 180, 225));
+            return layout;
+        }
+
+        // It gets a View that displays in the drop down popup the data at the specified position
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+        // It gets a View that displays the data at the specified position
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+    }
 
 
 
 }
+
+
+
+
+
+
+
+
+
 
 
 

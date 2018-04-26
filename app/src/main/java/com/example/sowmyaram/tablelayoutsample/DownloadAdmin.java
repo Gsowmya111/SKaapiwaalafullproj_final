@@ -139,7 +139,7 @@ public class DownloadAdmin extends Activity {
                 }
                     progressBar = new ProgressDialog(v.getContext());
                     progressBar.setCancelable(true);
-                    progressBar.setMessage("File uploading ...");
+                    progressBar.setMessage("Sending files ...");
                     progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progressBar.setProgress(0);
                     progressBar.setMax(100);

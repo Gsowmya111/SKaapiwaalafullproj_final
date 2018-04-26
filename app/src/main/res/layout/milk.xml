@@ -123,10 +123,12 @@
                 android:textSize="@dimen/campaign2"
                 android:textStyle="bold" />
 
+
             <EditText
                 android:id="@+id/etsugarval"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
+                android:layout_weight="1"
                 android:background="@drawable/display_tab"
                 android:gravity="center"
                 android:hint="00.0"
@@ -135,8 +137,7 @@
                 android:inputType="numberDecimal"
                 android:textColor="#000"
                 android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="@dimen/campaign2"
-                android:layout_weight="1" />
+                android:textSize="@dimen/campaign2" />
 
         </LinearLayout>
 
@@ -160,12 +161,12 @@
 
             <EditText
                 android:id="@+id/etmilkval"
-                android:layout_height="fill_parent"
                 android:layout_width="0dp"
+                android:layout_height="fill_parent"
                 android:background="@drawable/edit_ml"
                 android:gravity="center"
                 android:hint="00.0"
-                android:maxLength="4"
+                android:maxLength="5"
                 android:textColorHint="#8b8682"
                 android:textColor="#000"
                 android:inputType="none"
@@ -173,8 +174,6 @@
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/campaign2"
                 android:layout_weight="1" />
-
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"

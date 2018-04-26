@@ -185,6 +185,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Reverse_Delay" />
         <activity android:name=".Refresh"></activity>
+        <activity android:name=".Default_Setting"></activity>
     </application>
 
 </manifest>

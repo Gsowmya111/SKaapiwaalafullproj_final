@@ -81,7 +81,6 @@ public class Splash1 extends Activity {
                     @Override
                     public void run() {
                         //Go to setup()  after 4500ms
-
                         setup();
                     }
                 }, 4500);
